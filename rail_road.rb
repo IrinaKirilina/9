@@ -186,8 +186,8 @@ class RailRoad
     print 'Введите название конечной станции: '
     station_last_name = gets.chomp
     if route_name && station_first_name && station_last_name
-      station_first = add_station(station_first_name)
-      station_last = add_station(station_last_name)
+      add_station(station_first_name)
+      add_station(station_last_name)
       add_route(route_name, station_first_name, station_last_name)
       puts 'Маршрут добавлен'
     else
@@ -399,7 +399,7 @@ class RailRoad
     train_number = gets.chomp
     print 'Введите тип поезда: '
     train_type = gets.chomp.to_sym
-    if train_number && train_type
+    unless train_number && train_type
       train = find_train(train_number, train_type)
       train&.each_car do |car|
         puts "Вагон №#{car.number} #{car.type}, количество свободных мест: #{train.cars.count}"
@@ -436,7 +436,7 @@ class RailRoad
             print 'Введите количество чтобы занять место в вагоне: '
             volume = gets.chomp.to_i
             if volume
-              reserved_capacity = car.reserve_capacity(volume)
+              car.reserve_capacity(volume)
               puts 'Место забронировано'
             else
               print 'Необходимо ввести количество'
