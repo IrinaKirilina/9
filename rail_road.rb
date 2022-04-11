@@ -399,7 +399,7 @@ class RailRoad
     train_number = gets.chomp
     print 'Введите тип поезда: '
     train_type = gets.chomp.to_sym
-    unless train_number && train_type
+    if train_number && train_type
       train = find_train(train_number, train_type)
       train&.each_car do |car|
         puts "Вагон №#{car.number} #{car.type}, количество свободных мест: #{train.cars.count}"
